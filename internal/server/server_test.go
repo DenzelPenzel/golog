@@ -2,12 +2,16 @@ package server
 
 import (
 	"context"
+	"flag"
 	"io/ioutil"
 	"net"
 	"os"
 	"testing"
+	"time"
 
 	"github.com/stretchr/testify/require"
+	"go.opencensus.io/examples/exporter"
+	"go.uber.org/zap"
 	"google.golang.org/grpc"
 	"google.golang.org/grpc/codes"
 	"google.golang.org/grpc/credentials"
@@ -18,6 +22,23 @@ import (
 	"github.com/denisschmidt/golog/internal/config"
 	"github.com/denisschmidt/golog/internal/log"
 )
+
+var debug = flag.Bool("debug", false, "Enable observability for debugging.")
+
+func TestMain(m *testing.M) {
+	flag.Parse()
+
+	if *debug {
+		logger, err := zap.NewDevelopment()
+
+		if err != nil {
+			panic(err)
+		}
+		zap.ReplaceGlobals(logger)
+	}
+
+	os.Exit(m.Run())
+}
 
 // defines our list of test cases and then runs a subtest for each case
 func TestServer(t *testing.T) {
@@ -41,7 +62,6 @@ func TestServer(t *testing.T) {
 }
 
 // it is a helper function to set up each test case
-//
 func setupTest(t *testing.T, fn func(*Config)) (
 	rootClient api.LogClient,
 	nobodyClient api.LogClient,
@@ -114,6 +134,32 @@ func setupTest(t *testing.T, fn func(*Config)) (
 	// auth
 	authorizer := auth.New(config.ACLModelFile, config.ACLPolicyFile)
 
+	/*
+		Sets up and starts the telemetry exporter to write to two files
+		Each test gets its own separate trace and metrics files so we can see each test’s requests
+	*/
+	var telemetryExporter *exporter.LogExporter
+
+	if *debug {
+		metricsLogFile, err := ioutil.TempFile("", "metrics-*.log")
+		require.NoError(t, err)
+
+		t.Logf("metrics log file: %s", metricsLogFile.Name())
+
+		tracesLogFile, err := ioutil.TempFile("", "traces-*.log")
+		require.NoError(t, err)
+		t.Logf("traces log file: %s", tracesLogFile.Name())
+
+		telemetryExporter, err = exporter.NewLogExporter(exporter.Options{
+			MetricsLogFile:    metricsLogFile.Name(),
+			TracesLogFile:     tracesLogFile.Name(),
+			ReportingInterval: time.Second,
+		})
+		require.NoError(t, err)
+		err = telemetryExporter.Start()
+		require.NoError(t, err)
+	}
+
 	cfg = &Config{
 		CommitLog:  clientLog,
 		Authorizer: authorizer,
@@ -139,6 +185,13 @@ func setupTest(t *testing.T, fn func(*Config)) (
 		nobodyConn.Close()
 		listener.Close()
 		clientLog.Remove()
+		if telemetryExporter != nil {
+			// We sleep for 1.5 seconds to give the telemetry exporter enough time to flush its data to disk.
+			// Then we stop and close the exporter
+			time.Sleep(1500 * time.Millisecond)
+			telemetryExporter.Stop()
+			telemetryExporter.Close()
+		}
 	}
 }
 

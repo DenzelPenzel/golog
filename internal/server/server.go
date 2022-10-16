@@ -2,20 +2,30 @@ package server
 
 import (
 	"context"
+	"time"
 
 	api "github.com/denisschmidt/golog/api/v1"
 	grpc_middleware "github.com/grpc-ecosystem/go-grpc-middleware"
 	grpc_auth "github.com/grpc-ecosystem/go-grpc-middleware/auth"
+	grpc_ctxtags "github.com/grpc-ecosystem/go-grpc-middleware/tags"
 	"google.golang.org/grpc"
 	"google.golang.org/grpc/codes"
 	"google.golang.org/grpc/credentials"
 	"google.golang.org/grpc/peer"
 	"google.golang.org/grpc/status"
+
+	grpc_zap "github.com/grpc-ecosystem/go-grpc-middleware/logging/zap"
+	"go.opencensus.io/plugin/ocgrpc"
+	"go.opencensus.io/stats/view"
+	"go.opencensus.io/trace"
+	"go.uber.org/zap"
+	"go.uber.org/zap/zapcore"
 )
 
 type Config struct {
-	CommitLog  CommitLog
-	Authorizer Authorizer
+	CommitLog   CommitLog
+	Authorizer  Authorizer
+	GetServerer GetServerer
 }
 
 // refer to ACL policy table
@@ -29,7 +39,7 @@ type Authorizer interface {
 	Authorize(subject, object, action string) error
 }
 
-// need for dependency inversion
+// CommitLog - need for dependency inversion
 // service depend on a log interface rather than on a concrete type
 // service can use any log implementation that satisfies the slog interface
 type CommitLog interface {
@@ -126,16 +136,60 @@ func (s *grpcServer) ConsumeStream(req *api.ConsumeRequest, stream api.Log_Consu
 }
 
 func NewGRPCServer(config *Config, opts ...grpc.ServerOption) (*grpc.Server, error) {
+	logger := zap.L().Named("server")
+	zapOpts := []grpc_zap.Option{
+		grpc_zap.WithDurationField(
+			func(duration time.Duration) zapcore.Field {
+				return zap.Int64(
+					"grpc.time_ns",
+					duration.Nanoseconds(),
+				)
+			},
+		),
+	}
+
 	/*
-		hook up our authenticate() interceptor to our gRPC server so that server
-		identifies the subject of each RPC to kick off the authorization process
+		metrics_traces, configure OpenCensus
+
+		The default server views track stats on:
+			• Received bytes per RPC
+			• Sent bytes per RPC
+			• Latency
+			• Completed RPCs
+			Now, change the grpcOpts af
+
+	*/
+	trace.ApplyConfig(trace.Config{DefaultSampler: trace.AlwaysSample()})
+	err := view.Register(ocgrpc.DefaultServerViews...)
+	if err != nil {
+		return nil, err
+	}
+
+	/*
+		- configure gRPC to apply the Zap interceptors that log the gRPC
+			calls and attach OpenCensus as the server’s stat handler so that OpenCensus
+			can record stats on the server’s request handling.
+
+		- hook up our authenticate() interceptor to our gRPC server so that server
+			identifies the subject of each RPC to kick off the authorization process
 	*/
 	opts = append(opts, grpc.StreamInterceptor(
 		grpc_middleware.ChainStreamServer(
+
+			grpc_ctxtags.StreamServerInterceptor(),
+
+			grpc_zap.StreamServerInterceptor(logger, zapOpts...),
+
 			grpc_auth.StreamServerInterceptor(authenticate),
 		)), grpc.UnaryInterceptor(grpc_middleware.ChainUnaryServer(
+
+		grpc_ctxtags.UnaryServerInterceptor(),
+		grpc_zap.UnaryServerInterceptor(logger, zapOpts...),
+
 		grpc_auth.UnaryServerInterceptor(authenticate),
-	)))
+	)),
+		grpc.StatsHandler(&ocgrpc.ServerHandler{}),
+	)
 
 	// create a gRPC server
 	gsrv := grpc.NewServer(opts...)
@@ -178,4 +232,16 @@ func authenticate(ctx context.Context) (context.Context, error) {
 
 func subject(ctx context.Context) string {
 	return ctx.Value(subjectContextKey{}).(string)
+}
+
+type GetServerer interface {
+	GetServers() ([]*api.Server, error)
+}
+
+func (s *grpcServer) GetServer(ctx context.Context, req *api.GetServersRequest) (*api.GetServersResponse, error) {
+	servers, err := s.GetServerer.GetServers()
+	if err != nil {
+		return nil, err
+	}
+	return &api.GetServersResponse{Servers: servers}, nil
 }

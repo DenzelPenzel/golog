@@ -7,6 +7,8 @@ option go_package = "github.com/denisschmidt/golog/api/log_v1";
 message Record {
   bytes value = 1;
   uint64 offset = 2;
+  uint64 term = 3;
+  uint32 type = 4;
 }
 
 service Log {
@@ -14,6 +16,7 @@ service Log {
   rpc Consume (ConsumeRequest) returns (ConsumeResponse) {}
   rpc ConsumeStream(ConsumeRequest) returns (stream ConsumeResponse) {}
   rpc ProduceStream(stream ProduceRequest) returns (stream ProduceResponse) {}
+  rpc GetServers(GetServersRequest) returns (GetServersResponse) {}
 }
 
 message ProduceRequest {
@@ -30,4 +33,16 @@ message ConsumeRequest {
 
 message ConsumeResponse {
   Record record = 2;
+}
+
+message GetServersRequest {}
+
+message GetServersResponse {
+  repeated Server servers = 1;
+}
+
+message Server {
+  string id = 1;
+  string rpc_addr = 2;
+  bool is_leader = 3;
 }

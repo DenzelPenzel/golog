@@ -1,245 +1,241 @@
 make all --print-data-base --no-builtin-variables --no-builtin-rules --question
-# GNU Make 4.2.1
+make: *** No rule to make target 'all'.  Stop.
+
+# GNU Make 4.3
 # Built for x86_64-pc-linux-gnu
-# Copyright (C) 1988-2016 Free Software Foundation, Inc.
+# Copyright (C) 1988-2020 Free Software Foundation, Inc.
 # License GPLv3+: GNU GPL version 3 or later <http://gnu.org/licenses/gpl.html>
 # This is free software: you are free to change and redistribute it.
 # There is NO WARRANTY, to the extent permitted by law.
 
-# Make data base, printed on Sat Aug 20 15:13:34 2022
+# Make data base, printed on Wed Oct 12 23:30:55 2022
 
 # Variables
 
-# 'override' directive
-GNUMAKEFLAGS := 
-# automatic
-<D = $(patsubst %/,%,$(dir $<))
-# automatic
-?F = $(notdir $?)
 # environment
-PAPERSIZE = letter
+GDK_BACKEND = x11
 # environment
-DESKTOP_SESSION = ubuntu
-# default
-.SHELLFLAGS := -c
+LC_ALL = C
 # environment
-XDG_SESSION_CLASS = user
+GNOME_SHELL_SESSION_MODE = ubuntu
 # environment
-XDG_SESSION_TYPE = x11
-# environment
-NVM_INC = /home/denzel/.nvm/versions/node/v16.15.0/include/node
-# automatic
-?D = $(patsubst %/,%,$(dir $?))
-# environment
-IM_CONFIG_PHASE = 1
-# automatic
-@D = $(patsubst %/,%,$(dir $@))
-# environment
-XAUTHORITY = /run/user/1000/gdm/Xauthority
-# environment
-GDMSESSION = ubuntu
-# environment
-XMODIFIERS = @im=ibus
-# makefile
-CURDIR := /home/denzel/work/projects/golog
-# makefile
-SHELL = /bin/sh
-# makefile (from 'Makefile', line 1)
-CONFIG_PATH = ${HOME}/.golog
-# environment
-VSCODE_NLS_CONFIG = {"locale":"en-us","availableLanguages":{},"_languagePackSupport":true}
-# environment
-_ = /usr/share/code/code
-# environment
-JOURNAL_STREAM = 8:52044
-# environment
-XDG_CONFIG_DIRS = /etc/xdg/xdg-ubuntu:/etc/xdg
-# makefile (from 'Makefile', line 1)
-MAKEFILE_LIST :=  Makefile
-# automatic
-@F = $(notdir $@)
-# environment
-GIO_LAUNCHED_DESKTOP_FILE = /usr/share/applications/code.desktop
-# environment
-USERNAME = denzel
-# environment
-MAKELEVEL := 0
-# environment
-XDG_DATA_DIRS = /usr/share/ubuntu:/usr/local/share/:/usr/share/:/var/lib/snapd/desktop
-# environment
-DBUS_SESSION_BUS_ADDRESS = unix:path=/run/user/1000/bus
-# environment
-MANAGERPID = 1830
-# environment
-LC_NAME = en_US.UTF-8
-# environment
-VSCODE_CWD = /home/denzel
-# environment
-GOPROXY = https://proxy.golang.org,direct
-# default
-MAKE_HOST := x86_64-pc-linux-gnu
-# environment
-PATH = /home/denzel/.cache/cloud-code/installer/google-cloud-sdk/bin:/home/denzel/.nvm/versions/node/v16.15.0/bin:/home/denzel/.pyenv/shims:/home/denzel/.pyenv/shims:/home/denzel/.local/bin:/home/denzel/.pyenv/bin:/home/denzel/.pyenv/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin:/usr/local/protobuf/bin:/home/denzel/go/bin:/home/denzel/google-cloud-sdk/bin
-# environment
-GPG_AGENT_INFO = /run/user/1000/gnupg/S.gpg-agent:0:1
+SSH_AGENT_LAUNCHER = openssh
 # environment
 GJS_DEBUG_OUTPUT = stderr
 # environment
-LSCOLORS = Gxfxcxdxbxegedabagacad
+LC_NAME = en_US.UTF-8
 # environment
-SESSION_MANAGER = local/denzel-TM1701:@/tmp/.ICE-unix/2360,unix/denzel-TM1701:/tmp/.ICE-unix/2360
+LC_NUMERIC = en_US.UTF-8
 # environment
-XDG_RUNTIME_DIR = /run/user/1000
+VSCODE_CWD = /home/denzel
+# environment
+LC_ADDRESS = en_US.UTF-8
+# default
+MAKE_COMMAND := make
+# environment
+QT_ACCESSIBILITY = 1
 # environment
 GOPATH = /home/denzel/go
+# automatic
+@D = $(patsubst %/,%,$(dir $@))
 # environment
-NVM_BIN = /home/denzel/.nvm/versions/node/v16.15.0/bin
+PYENV_SHELL = zsh
 # environment
-XDG_MENU_PREFIX = gnome-
+CLOUDSDK_METRICS_ENVIRONMENT_VERSION = 1.20.3
 # environment
-ELECTRON_RUN_AS_NODE = 1
-# environment
-PYENV_ROOT = /home/denzel/.pyenv
-# environment
-INVOCATION_ID = 5944e1ca5f8842d0bf9cb262f5459251
+VSCODE_HANDLES_UNCAUGHT_ERRORS = true
 # default
-.FEATURES := target-specific order-only second-expansion else-if shortest-stem undefine oneshell archives jobserver output-sync check-symlink load
+.VARIABLES := 
 # environment
-LS_COLORS = 
+PWD = /home/denzel/work/projects/golog
+# automatic
+%D = $(patsubst %/,%,$(dir $%))
 # environment
-CLOUDSDK_METRICS_ENVIRONMENT = cloudcode.vscode
+LSCOLORS = Gxfxcxdxbxegedabagacad
 # environment
-XDG_SESSION_DESKTOP = ubuntu
-# environment
-SSH_AUTH_SOCK = /run/user/1000/keyring/ssh
-# environment
-GIO_LAUNCHED_DESKTOP_FILE_PID = 3173
+XDG_DATA_DIRS = /usr/local/share/:/usr/share/:/var/lib/snapd/desktop
+# automatic
+^D = $(patsubst %/,%,$(dir $^))
 # automatic
 %F = $(notdir $%)
 # environment
-DISPLAY = :0
+VSCODE_CODE_CACHE_PATH = /home/denzel/.config/Code/CachedData/64bbfbf67ada9953918d72e1df2f4d8e537d340e
 # environment
-CLOUDSDK_METRICS_ENVIRONMENT_VERSION = 1.20.1
+LANG = C
 # environment
-PWD = /home/denzel/work/projects/golog
+XAUTHORITY = /run/user/1000/.mutter-Xwaylandauth.I6Z2T1
 # default
 .LOADED := 
+# default
+.INCLUDE_DIRS = /usr/local/include /usr/include /usr/include
+# makefile
+MAKEFLAGS = pqrR
+# makefile
+CURDIR := /home/denzel/work/projects/golog
 # environment
-SSH_AGENT_PID = 2316
+APPLICATION_INSIGHTS_NO_DIAGNOSTIC_CHANNEL = 1
+# automatic
+*D = $(patsubst %/,%,$(dir $*))
+# environment
+MFLAGS = -pqrR
+# environment
+SSH_AUTH_SOCK = /run/user/1000/keyring/ssh
+# default
+.SHELLFLAGS := -c
+# makefile (from 'Makefile', line 1)
+CONFIG_PATH = ${HOME}/.golog
+# environment
+WAYLAND_DISPLAY = wayland-0
+# automatic
++D = $(patsubst %/,%,$(dir $+))
+# environment
+XDG_SESSION_DESKTOP = ubuntu
+# makefile (from 'Makefile', line 1)
+MAKEFILE_LIST := Makefile
+# automatic
+@F = $(notdir $@)
+# environment
+ZSH = /home/denzel/.oh-my-zsh
+# environment
+VSCODE_PID = 3957
+# environment
+XDG_SESSION_TYPE = wayland
+# automatic
+?D = $(patsubst %/,%,$(dir $?))
+# environment
+SESSION_MANAGER = local/denzel-TM1701:@/tmp/.ICE-unix/1989,unix/denzel-TM1701:/tmp/.ICE-unix/1989
+# automatic
+*F = $(notdir $*)
+# environment
+CHROME_DESKTOP = code-url-handler.desktop
+# environment
+DBUS_SESSION_BUS_ADDRESS = unix:path=/run/user/1000/bus
+# automatic
+<D = $(patsubst %/,%,$(dir $<))
+# environment
+VSCODE_NLS_CONFIG = {"locale":"en-us","availableLanguages":{},"_languagePackSupport":true}
+# default
+MAKE_HOST := x86_64-pc-linux-gnu
+# environment
+GNOME_DESKTOP_SESSION_ID = this-is-deprecated
+# makefile
+SHELL = /bin/sh
+# default
+MAKECMDGOALS := all
+# environment
+XMODIFIERS = @im=ibus
+# environment
+GJS_DEBUG_TOPICS = JS ERROR;JS LOG
+# environment
+SHLVL = 0
+# environment
+MAKELEVEL := 0
+# default
+MAKE = $(MAKE_COMMAND)
+# environment
+PATH = /home/denzel/.cache/cloud-code/installer/google-cloud-sdk/bin:/home/denzel/.local/bin:/home/denzel/.pyenv/shims:/home/denzel/.pyenv/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin:/snap/bin:/usr/local/protobuf/bin:/usr/local/protobuf/bin:/home/denzel/go/bin:/home/denzel/google-cloud-sdk/bin
+# default
+MAKEFILES := 
+# environment
+LC_MONETARY = en_US.UTF-8
+# automatic
+^F = $(notdir $^)
+# environment
+LC_TIME = en_US.UTF-8
+# environment
+INVOCATION_ID = e4b4a7043ec647b69fbb92d7adb36394
+# environment
+USERNAME = denzel
+# environment
+GNOME_SETUP_DISPLAY = :1
+# environment
+LC_TELEPHONE = en_US.UTF-8
+# automatic
+?F = $(notdir $?)
+# environment
+XDG_CURRENT_DESKTOP = Unity
+# environment
+LS_COLORS = 
+# automatic
++F = $(notdir $+)
+# environment
+LESS = -R
+# environment
+DESKTOP_SESSION = ubuntu
 # environment
 ORIGINAL_XDG_CURRENT_DESKTOP = ubuntu:GNOME
 # environment
+PYENV_ROOT = /home/denzel/.pyenv
+# 'override' directive
+GNUMAKEFLAGS := 
+# environment
+LOGNAME = denzel
+# environment
+GIO_LAUNCHED_DESKTOP_FILE = /usr/share/applications/code.desktop
+# makefile
+.DEFAULT_GOAL := init
+# environment
+SYSTEMD_EXEC_PID = 2006
+# environment
+DISPLAY = :0
+# environment
+USER = denzel
+# environment
 GTK_MODULES = gail:atk-bridge
+# default
+MAKE_VERSION := 4.3
+# environment
+MANAGERPID = 1846
+# environment
+LC_MEASUREMENT = en_US.UTF-8
+# environment
+GIO_LAUNCHED_DESKTOP_FILE_PID = 3957
+# environment
+PAGER = less
+# environment
+_ = /usr/share/code/code
+# environment
+LC_PAPER = en_US.UTF-8
+# environment
+XDG_RUNTIME_DIR = /run/user/1000
+# environment
+JOURNAL_STREAM = 8:33432
+# environment
+GOMODCACHE = /home/denzel/go/pkg/mod
+# environment
+XDG_SESSION_CLASS = user
 # environment
 VSCODE_AMD_ENTRYPOINT = vs/workbench/api/node/extensionHostProcess
 # environment
 HOME = /home/denzel
 # environment
-VSCODE_CODE_CACHE_PATH = /home/denzel/.config/Code/CachedData/e4503b30fc78200f846c62cf8091b76ff5547662
-# environment
-LOGNAME = denzel
-# environment
-APPLICATION_INSIGHTS_NO_DIAGNOSTIC_CHANNEL = 1
-# environment
-NVM_CD_FLAGS = 
-# automatic
-+F = $(notdir $+)
-# environment
-ZSH = /home/denzel/.oh-my-zsh
-# environment
-VSCODE_HANDLES_UNCAUGHT_ERRORS = true
-# environment
-GNOME_DESKTOP_SESSION_ID = this-is-deprecated
-# automatic
-^D = $(patsubst %/,%,$(dir $^))
-# environment
-LC_TIME = en_US.UTF-8
-# default
-MAKE = $(MAKE_COMMAND)
-# default
-MAKECMDGOALS := all
-# environment
 QT_IM_MODULE = ibus
 # environment
-SHLVL = 0
+ELECTRON_RUN_AS_NODE = 1
 # environment
-GNOME_SHELL_SESSION_MODE = ubuntu
+VSCODE_IPC_HOOK = /run/user/1000/vscode-fa3e4cb0-1.72.0-main.sock
+# environment
+PAPERSIZE = letter
+# environment
+GOPROXY = https://proxy.golang.org,direct
 # default
-MAKE_VERSION := 4.2.1
-# environment
-USER = denzel
-# environment
-LC_MONETARY = en_US.UTF-8
-# makefile
-.DEFAULT_GOAL := init
-# environment
-XDG_CURRENT_DESKTOP = Unity
-# environment
-LESS = -R
-# automatic
-%D = $(patsubst %/,%,$(dir $%))
-# environment
-LC_TELEPHONE = en_US.UTF-8
-# default
-MAKE_COMMAND := make
-# default
-.VARIABLES := 
-# automatic
-*F = $(notdir $*)
-# environment
-VSCODE_IPC_HOOK = /run/user/1000/vscode-fa3e4cb0-1.70.2-main.sock
-# makefile
-MAKEFLAGS = pqrR
-# environment
-MFLAGS = -pqrR
-# automatic
-*D = $(patsubst %/,%,$(dir $*))
-# environment
-NVM_DIR = /home/denzel/.nvm
-# automatic
-+D = $(patsubst %/,%,$(dir $+))
-# environment
-GDK_BACKEND = x11
-# environment
-LC_PAPER = en_US.UTF-8
-# environment
-QT_ACCESSIBILITY = 1
-# default
-MAKEFILES := 
-# environment
-LC_NUMERIC = en_US.UTF-8
+.RECIPEPREFIX := 
 # automatic
 <F = $(notdir $<)
-# environment
-LC_MEASUREMENT = en_US.UTF-8
-# environment
-PAGER = less
-# environment
-LC_ALL = C
-# environment
-GJS_DEBUG_TOPICS = JS ERROR;JS LOG
-# automatic
-^F = $(notdir $^)
 # default
 SUFFIXES := 
 # environment
-CHROME_DESKTOP = code-url-handler.desktop
-# environment
-WINDOWPATH = 2
+CLOUDSDK_METRICS_ENVIRONMENT = cloudcode.vscode
 # default
-.INCLUDE_DIRS = /usr/include /usr/local/include /usr/include
+.FEATURES := target-specific order-only second-expansion else-if shortest-stem undefine oneshell nocomment grouped-target extra-prereqs archives jobserver output-sync check-symlink load
+# environment
+XDG_MENU_PREFIX = gnome-
+# environment
+GDMSESSION = ubuntu
 # environment
 LC_IDENTIFICATION = en_US.UTF-8
-# default
-.RECIPEPREFIX := 
-# environment
-LC_ADDRESS = en_US.UTF-8
-# environment
-LANG = C
-# environment
-VSCODE_PID = 3173
 # variable set hash-table stats:
-# Load=114/1024=11%, Rehash=0, Collisions=18/139=13%
+# Load=111/1024=11%, Rehash=0, Collisions=4/149=3%
 
 # Pattern-specific Variable Values
 
@@ -247,9 +243,9 @@ VSCODE_PID = 3173
 
 # Directories
 
-# . (device 66312, inode 4047929): 13 files, no impossibilities.
+# . (device 66312, inode 4047929): 14 files, no impossibilities.
 
-# 13 files, no impossibilities in 1 directories.
+# 14 files, no impossibilities in 1 directories.
 
 # Implicit Rules
 
@@ -257,64 +253,25 @@ VSCODE_PID = 3173
 
 # Files
 
-# Not a target:
-all:
-#  Command line target.
-#  Implicit rule search has been done.
-#  File does not exist.
-#  File has not been updated.
-
-.PHONY: init gencert test compile
-#  Implicit rule search has not been done.
-#  Modification time never checked.
-#  File has not been updated.
-
-# Not a target:
-Makefile:
-#  Implicit rule search has been done.
-#  Last modified 2022-08-13 16:01:21.058834485
-#  File has been updated.
-#  Successfully updated.
-
-test:
-#  Phony target (prerequisite of .PHONY).
-#  Implicit rule search has not been done.
-#  File does not exist.
-#  File has not been updated.
-#  recipe to execute (from 'Makefile', line 21):
-	go test -race ./...
-
-gencert:
- 
-make: *** No rule to make target 'all'.  Stop.
-
-#  Phony target (prerequisite of .PHONY).
-#  Implicit rule search has not been done.
-#  File does not exist.
-#  File has not been updated.
-#  recipe to execute (from 'Makefile', line 9):
-	cfssl gencert \
-			-initca cfg/ca-csr.json | cfssljson -bare ca
-	cfssl gencert \
-			-ca=ca.pem \
-			-ca-key=ca-key.pem \
-			-config=cfg/ca-config.json \
-			-profile=server \
-			cfg/server-csr.json | cfssljson -bare server
-	mv *.pem *.csr ${CONFIG_PATH}
-
 compile:
 #  Phony target (prerequisite of .PHONY).
 #  Implicit rule search has not been done.
 #  File does not exist.
 #  File has not been updated.
-#  recipe to execute (from 'Makefile', line 25):
+#  recipe to execute (from 'Makefile', line 52):
 	protoc api/v1/*.proto \
 		--go_out=. \
 		--go-grpc_out=. \
 		--go_opt=paths=source_relative \
 		--go-grpc_opt=paths=source_relative \
 		--proto_path=.
+
+# Not a target:
+Makefile:
+#  Implicit rule search has been done.
+#  Last modified 2022-08-27 19:11:16.571729351
+#  File has been updated.
+#  Successfully updated.
 
 # Not a target:
 .DEFAULT:
@@ -330,20 +287,85 @@ init:
 #  recipe to execute (from 'Makefile', line 5):
 	mkdir -p ${CONFIG_PATH}
 
+gencert:
+#  Phony target (prerequisite of .PHONY).
+#  Implicit rule search has not been done.
+#  File does not exist.
+#  File has not been updated.
+#  recipe to execute (from 'Makefile', line 9):
+	cfssl gencert \
+		-initca cfg/ca-csr.json | cfssljson -bare ca
+	cfssl gencert \
+		-ca=ca.pem \
+		-ca-key=ca-key.pem \
+		-config=cfg/ca-config.json \
+		-profile=server \
+ 
+		cfg/server-csr.json | cfssljson -bare server
+	cfssl gencert \
+		-ca=ca.pem \
+		-ca-key=ca-key.pem \
+		-config=test/ca-config.json \
+		-profile=client \
+		-cn="root" \
+		test/client-csr.json | cfssljson -bare root-client
+	cfssl gencert \
+		-ca=ca.pem \
+		-ca-key=ca-key.pem \
+		-config=test/ca-config.json \
+		-profile=client \
+		-cn="nobody" \
+		test/client-csr.json | cfssljson -bare nobody-client
+	mv *.pem *.csr ${CONFIG_PATH}
+
+# Not a target:
+all:
+#  Command line target.
+#  Implicit rule search has been done.
+#  File does not exist.
+#  File has not been updated.
+
+/home/denzel/.golog/model.conf:
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
+#  recipe to execute (from 'Makefile', line 41):
+	cp test/model.conf $(CONFIG_PATH)/model.conf
+
+test: /home/denzel/.golog/policy.csv /home/denzel/.golog/model.conf
+#  Phony target (prerequisite of .PHONY).
+#  Implicit rule search has not been done.
+#  File does not exist.
+#  File has not been updated.
+#  recipe to execute (from 'Makefile', line 48):
+	go test -race ./...
+
+/home/denzel/.golog/policy.csv:
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
+#  recipe to execute (from 'Makefile', line 44):
+	cp test/policy.csv $(CONFIG_PATH)/policy.csv
+
+.PHONY: init gencert test compile
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
+
 # files hash-table stats:
-# Load=9/1024=1%, Rehash=0, Collisions=0/30=0%
+# Load=11/1024=1%, Rehash=0, Collisions=0/34=0%
 # VPATH Search Paths
 
 # No 'vpath' search paths.
 
 # No general ('VPATH' variable) search path.
 
-# strcache buffers: 1 (0) / strings = 23 / storage = 167 B / avg = 7 B
-# current buf: size = 8162 B / used = 167 B / count = 23 / avg = 7 B
+# strcache buffers: 1 (0) / strings = 25 / storage = 229 B / avg = 9 B
+# current buf: size = 8162 B / used = 229 B / count = 25 / avg = 9 B
 
-# strcache performance: lookups = 42 / hit rate = 45%
+# strcache performance: lookups = 49 / hit rate = 48%
 # hash-table stats:
-# Load=23/8192=0%, Rehash=0, Collisions=1/42=2%
-# Finished Make data base on Sat Aug 20 15:13:34 2022
+# Load=25/8192=0%, Rehash=0, Collisions=0/49=0%
+# Finished Make data base on Wed Oct 12 23:30:55 2022
 
  
