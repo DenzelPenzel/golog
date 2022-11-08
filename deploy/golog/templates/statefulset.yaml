@@ -1,0 +1,84 @@
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: {{ include "golog.fullname" . }}
+  namespace: {{ .Release.Namespace }}
+  labels: {{ include "golog.labels" . | nindent 4 }}
+spec:
+  selector:
+    matchLabels: {{ include "golog.selectorLabels" . | nindent 6 }}
+  serviceName: {{ include "golog.fullname" . }}
+  replicas: {{ .Values.replicas }}
+  template:
+    metadata:
+      name: {{ include "golog.fullname" . }}
+      labels: {{ include "golog.labels" . | nindent 8 }}
+    spec:
+      initContainers:
+        - name: {{ include "golog.fullname" . }}-config-init
+          image: busybox
+          imagePullPolicy: IfNotPresent
+          command:
+            - /bin/sh
+            - -c
+            - |-
+              ID=$(echo $HOSTNAME | rev | cut -d- -f1 | rev)
+              cat > /var/run/golog/config.yaml <<EOD
+              data-dir: /var/run/golog/data
+              rpc-port: {{.Values.rpcPort}}
+              bind-addr: "$HOSTNAME.golog.{{.Release.Namespace}}.svc.cluster.local:{{.Values.serfPort}}"
+              bootstrap: $([ $ID = 0 ] && echo true || echo false)
+              $([ $ID != 0 ] && echo 'start-join-addrs: "golog-0.golog.{{.Release.Namespace}}.svc.cluster.local:{{.Values.serfPort}}"')
+              EOD
+              cat /var/run/golog/config.yaml
+          volumeMounts:
+            - name: datadir
+              mountPath: /var/run/golog
+      containers:
+        - name: {{ include "golog.fullname" . }}
+          image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
+          ports:
+            - containerPort: {{ .Values.rpcPort }}
+              name: rpc
+            - containerPort: {{ .Values.serfPort }}
+              name: serf
+          args:
+            - --config-file=/var/run/golog/config.yaml
+          # END: initial
+          # probes...
+          # END: containers
+          # START: probes
+          readinessProbe:
+            exec:
+              command:
+                - /bin/sh
+                - -c
+                - |-
+                  /bin/grpc_health_probe -addr=$HOSTNAME.golog.{{.Release.Namespace}}.svc.cluster.local:{{.Values.rpcPort}}
+            initialDelaySeconds: 10
+
+          livenessProbe:
+            exec:
+              command:
+                - /bin/sh
+                - -c
+                - |-
+                  /bin/grpc_health_probe -addr=$HOSTNAME.golog.{{.Release.Namespace}}.svc.cluster.local:{{.Values.rpcPort}}
+            initialDelaySeconds: 10
+            
+
+          # END: probes
+          # START: containers
+          volumeMounts:
+            - name: datadir
+              mountPath: /var/run/golog
+      # END: containers
+      # START: initial
+  volumeClaimTemplates:
+    - metadata:
+        name: datadir
+      spec:
+        accessModes: [ "ReadWriteOnce" ]
+        resources:
+          requests:
+            storage: {{ .Values.storage }}

@@ -38,8 +38,7 @@ func TestResolver(t *testing.T) {
 	go srv.Serve(l)
 
 	// init a mock clientConn
-	clientConn := &clientConn{}
-
+	conn := &clientConn{}
 	tlsConfig, err = config.SetupTLSConfig(config.TLSConfig{
 		CertFile:      config.RootClientCertFile,
 		KeyFile:       config.RootClientKeyFile,
@@ -56,7 +55,9 @@ func TestResolver(t *testing.T) {
 
 	// create and build test resolver
 	r := &loadbalance.Resolver{}
-	_, err = r.Build(resolver.Target{Endpoint: l.Addr().String()}, clientConn, opts)
+	_, err = r.Build(resolver.Target{
+		Endpoint: l.Addr().String(),
+	}, conn, opts)
 	require.NoError(t, err)
 
 	wantState := resolver.State{
@@ -68,12 +69,12 @@ func TestResolver(t *testing.T) {
 			Attributes: attributes.New("is_leader", false),
 		}},
 	}
-	require.Equal(t, wantState, clientConn.state)
+	require.Equal(t, wantState, conn.state)
 
 	// clear up all addresses
-	clientConn.state.Addresses = nil
+	conn.state.Addresses = nil
 	r.ResolveNow(resolver.ResolveNowOptions{})
-	require.Equal(t, wantState, clientConn.state)
+	require.Equal(t, wantState, conn.state)
 }
 
 type getServers struct{}
@@ -94,9 +95,10 @@ type clientConn struct {
 	state resolver.State
 }
 
-func (c *clientConn) UpdateState(state resolver.State) {
+func (c *clientConn) UpdateState(state resolver.State) error {
 	// keep a ref to the state the resolver updated it
 	c.state = state
+	return nil
 }
 
 func (c *clientConn) ReportError(err error) {}
@@ -105,6 +107,8 @@ func (c *clientConn) NewAddress(addrs []resolver.Address) {}
 
 func (c *clientConn) NewServiceConfig(config string) {}
 
-func (c *clientConn) ParseServiceConfig(config string) *serviceconfig.ParseResult {
+func (c *clientConn) ParseServiceConfig(
+	config string,
+) *serviceconfig.ParseResult {
 	return nil
 }

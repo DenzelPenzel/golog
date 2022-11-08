@@ -55,3 +55,8 @@ compile:
 		--go_opt=paths=source_relative \
 		--go-grpc_opt=paths=source_relative \
 		--proto_path=.
+
+TAG ?= 0.0.1
+
+build-docker:
+	docker build -t github.com/denisschmidt/golog:$(TAG) .

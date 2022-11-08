@@ -2,6 +2,7 @@ package server
 
 import (
 	"context"
+	"google.golang.org/grpc/health"
 	"time"
 
 	api "github.com/denisschmidt/golog/api/v1"
@@ -20,6 +21,8 @@ import (
 	"go.opencensus.io/trace"
 	"go.uber.org/zap"
 	"go.uber.org/zap/zapcore"
+
+	healthpb "google.golang.org/grpc/health/grpc_health_v1"
 )
 
 type Config struct {
@@ -135,7 +138,7 @@ func (s *grpcServer) ConsumeStream(req *api.ConsumeRequest, stream api.Log_Consu
 	}
 }
 
-func NewGRPCServer(config *Config, opts ...grpc.ServerOption) (*grpc.Server, error) {
+func NewGRPCServer(config *Config, grpcOpts ...grpc.ServerOption) (*grpc.Server, error) {
 	logger := zap.L().Named("server")
 	zapOpts := []grpc_zap.Option{
 		grpc_zap.WithDurationField(
@@ -159,7 +162,9 @@ func NewGRPCServer(config *Config, opts ...grpc.ServerOption) (*grpc.Server, err
 			Now, change the grpcOpts af
 
 	*/
-	trace.ApplyConfig(trace.Config{DefaultSampler: trace.AlwaysSample()})
+	trace.ApplyConfig(trace.Config{
+		DefaultSampler: trace.AlwaysSample(),
+	})
 	err := view.Register(ocgrpc.DefaultServerViews...)
 	if err != nil {
 		return nil, err
@@ -173,26 +178,30 @@ func NewGRPCServer(config *Config, opts ...grpc.ServerOption) (*grpc.Server, err
 		- hook up our authenticate() interceptor to our gRPC server so that server
 			identifies the subject of each RPC to kick off the authorization process
 	*/
-	opts = append(opts, grpc.StreamInterceptor(
-		grpc_middleware.ChainStreamServer(
-
-			grpc_ctxtags.StreamServerInterceptor(),
-
-			grpc_zap.StreamServerInterceptor(logger, zapOpts...),
-
-			grpc_auth.StreamServerInterceptor(authenticate),
-		)), grpc.UnaryInterceptor(grpc_middleware.ChainUnaryServer(
-
-		grpc_ctxtags.UnaryServerInterceptor(),
-		grpc_zap.UnaryServerInterceptor(logger, zapOpts...),
-
-		grpc_auth.UnaryServerInterceptor(authenticate),
-	)),
+	grpcOpts = append(grpcOpts,
+		grpc.StreamInterceptor(
+			grpc_middleware.ChainStreamServer(
+				grpc_ctxtags.StreamServerInterceptor(),
+				grpc_zap.StreamServerInterceptor(logger, zapOpts...),
+				grpc_auth.StreamServerInterceptor(authenticate),
+			)), grpc.UnaryInterceptor(grpc_middleware.ChainUnaryServer(
+			grpc_ctxtags.UnaryServerInterceptor(),
+			grpc_zap.UnaryServerInterceptor(logger, zapOpts...),
+			grpc_auth.UnaryServerInterceptor(authenticate),
+		)),
 		grpc.StatsHandler(&ocgrpc.ServerHandler{}),
 	)
 
 	// create a gRPC server
-	gsrv := grpc.NewServer(opts...)
+	gsrv := grpc.NewServer(grpcOpts...)
+
+	// create a service that support the health check protocol,
+	// so that probe knows the server is alive and ready
+	// gRPC services conventionally use a grpc_health_probe command that expects
+	// that the server to satisfy the gRPC health checking protocol
+	hsrv := health.NewServer()
+	hsrv.SetServingStatus("", healthpb.HealthCheckResponse_SERVING)
+	healthpb.RegisterHealthServer(gsrv, hsrv)
 
 	// instantiate your service
 	srv, err := newGRPCServer(config)
@@ -238,7 +247,7 @@ type GetServerer interface {
 	GetServers() ([]*api.Server, error)
 }
 
-func (s *grpcServer) GetServer(ctx context.Context, req *api.GetServersRequest) (*api.GetServersResponse, error) {
+func (s *grpcServer) GetServers(ctx context.Context, req *api.GetServersRequest) (*api.GetServersResponse, error) {
 	servers, err := s.GetServerer.GetServers()
 	if err != nil {
 		return nil, err
