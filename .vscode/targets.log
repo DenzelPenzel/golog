@@ -8,7 +8,7 @@ make: *** No rule to make target 'all'.  Stop.
 # This is free software: you are free to change and redistribute it.
 # There is NO WARRANTY, to the extent permitted by law.
 
-# Make data base, printed on Wed Oct 12 23:30:55 2022
+# Make data base, printed on Sat May 13 22:13:34 2023
 
 # Variables
 
@@ -27,7 +27,13 @@ LC_NAME = en_US.UTF-8
 # environment
 LC_NUMERIC = en_US.UTF-8
 # environment
+VSCODE_CRASH_REPORTER_PROCESS_TYPE = extensionHost
+# environment
 VSCODE_CWD = /home/denzel
+# environment
+WINDOWPATH = 2
+# environment
+NVM_DIR = /home/denzel/.nvm
 # environment
 LC_ADDRESS = en_US.UTF-8
 # default
@@ -41,7 +47,7 @@ GOPATH = /home/denzel/go
 # environment
 PYENV_SHELL = zsh
 # environment
-CLOUDSDK_METRICS_ENVIRONMENT_VERSION = 1.20.3
+CLOUDSDK_METRICS_ENVIRONMENT_VERSION = 1.21.5
 # environment
 VSCODE_HANDLES_UNCAUGHT_ERRORS = true
 # default
@@ -53,17 +59,19 @@ PWD = /home/denzel/work/projects/golog
 # environment
 LSCOLORS = Gxfxcxdxbxegedabagacad
 # environment
-XDG_DATA_DIRS = /usr/local/share/:/usr/share/:/var/lib/snapd/desktop
+XDG_DATA_DIRS = /usr/share/ubuntu:/usr/share/gnome:/usr/local/share/:/usr/share/:/var/lib/snapd/desktop
 # automatic
 ^D = $(patsubst %/,%,$(dir $^))
 # automatic
 %F = $(notdir $%)
 # environment
-VSCODE_CODE_CACHE_PATH = /home/denzel/.config/Code/CachedData/64bbfbf67ada9953918d72e1df2f4d8e537d340e
+NVM_INC = /home/denzel/.nvm/versions/node/v16.15.0/include/node
+# environment
+VSCODE_CODE_CACHE_PATH = /home/denzel/.config/Code/CachedData/b3e4e68a0bc097f0ae7907b217c1119af9e03435
 # environment
 LANG = C
 # environment
-XAUTHORITY = /run/user/1000/.mutter-Xwaylandauth.I6Z2T1
+XAUTHORITY = /run/user/1000/gdm/Xauthority
 # default
 .LOADED := 
 # default
@@ -85,7 +93,9 @@ SSH_AUTH_SOCK = /run/user/1000/keyring/ssh
 # makefile (from 'Makefile', line 1)
 CONFIG_PATH = ${HOME}/.golog
 # environment
-WAYLAND_DISPLAY = wayland-0
+NVM_BIN = /home/denzel/.nvm/versions/node/v16.15.0/bin
+# environment
+XDG_CONFIG_DIRS = /etc/xdg/xdg-ubuntu:/etc/xdg
 # automatic
 +D = $(patsubst %/,%,$(dir $+))
 # environment
@@ -97,13 +107,15 @@ MAKEFILE_LIST := Makefile
 # environment
 ZSH = /home/denzel/.oh-my-zsh
 # environment
-VSCODE_PID = 3957
+VSCODE_PID = 431314
 # environment
-XDG_SESSION_TYPE = wayland
+XDG_SESSION_TYPE = x11
 # automatic
 ?D = $(patsubst %/,%,$(dir $?))
+# makefile (from 'Makefile', line 59)
+TAG = 0.0.1
 # environment
-SESSION_MANAGER = local/denzel-TM1701:@/tmp/.ICE-unix/1989,unix/denzel-TM1701:/tmp/.ICE-unix/1989
+SESSION_MANAGER = local/denzel-TM1701:@/tmp/.ICE-unix/4336,unix/denzel-TM1701:/tmp/.ICE-unix/4336
 # automatic
 *F = $(notdir $*)
 # environment
@@ -113,7 +125,7 @@ DBUS_SESSION_BUS_ADDRESS = unix:path=/run/user/1000/bus
 # automatic
 <D = $(patsubst %/,%,$(dir $<))
 # environment
-VSCODE_NLS_CONFIG = {"locale":"en-us","availableLanguages":{},"_languagePackSupport":true}
+VSCODE_NLS_CONFIG = {"locale":"en-us","osLocale":"en-us","availableLanguages":{},"_languagePackSupport":true}
 # default
 MAKE_HOST := x86_64-pc-linux-gnu
 # environment
@@ -133,7 +145,7 @@ MAKELEVEL := 0
 # default
 MAKE = $(MAKE_COMMAND)
 # environment
-PATH = /home/denzel/.cache/cloud-code/installer/google-cloud-sdk/bin:/home/denzel/.local/bin:/home/denzel/.pyenv/shims:/home/denzel/.pyenv/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin:/snap/bin:/usr/local/protobuf/bin:/usr/local/protobuf/bin:/home/denzel/go/bin:/home/denzel/google-cloud-sdk/bin
+PATH = /home/denzel/.cache/cloud-code/installer/google-cloud-sdk/bin:/home/denzel/.local/bin:/home/denzel/.pyenv/shims:/home/denzel/.nvm/versions/node/v16.15.0/bin:/home/denzel/.local/bin:/home/denzel/.pyenv/bin:/home/denzel/.pyenv/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin:/snap/bin:/usr/local/protobuf/bin:/home/denzel/go/bin:/home/denzel/google-cloud-sdk/bin
 # default
 MAKEFILES := 
 # environment
@@ -143,19 +155,15 @@ LC_MONETARY = en_US.UTF-8
 # environment
 LC_TIME = en_US.UTF-8
 # environment
-INVOCATION_ID = e4b4a7043ec647b69fbb92d7adb36394
+INVOCATION_ID = 45ef94dc52984cc0aca4e7ea2bb0d023
 # environment
 USERNAME = denzel
-# environment
-GNOME_SETUP_DISPLAY = :1
 # environment
 LC_TELEPHONE = en_US.UTF-8
 # automatic
 ?F = $(notdir $?)
 # environment
 XDG_CURRENT_DESKTOP = Unity
-# environment
-LS_COLORS = 
 # automatic
 +F = $(notdir $+)
 # environment
@@ -175,9 +183,9 @@ GIO_LAUNCHED_DESKTOP_FILE = /usr/share/applications/code.desktop
 # makefile
 .DEFAULT_GOAL := init
 # environment
-SYSTEMD_EXEC_PID = 2006
+SYSTEMD_EXEC_PID = 4354
 # environment
-DISPLAY = :0
+DISPLAY = :1
 # environment
 USER = denzel
 # environment
@@ -185,11 +193,13 @@ GTK_MODULES = gail:atk-bridge
 # default
 MAKE_VERSION := 4.3
 # environment
-MANAGERPID = 1846
+MANAGERPID = 3651
+# environment
+DEBUGINFOD_URLS = https://debuginfod.ubuntu.com 
 # environment
 LC_MEASUREMENT = en_US.UTF-8
 # environment
-GIO_LAUNCHED_DESKTOP_FILE_PID = 3957
+GIO_LAUNCHED_DESKTOP_FILE_PID = 431314
 # environment
 PAGER = less
 # environment
@@ -199,7 +209,11 @@ LC_PAPER = en_US.UTF-8
 # environment
 XDG_RUNTIME_DIR = /run/user/1000
 # environment
-JOURNAL_STREAM = 8:33432
+GPG_AGENT_INFO = /run/user/1000/gnupg/S.gpg-agent:0:1
+# environment
+NVM_CD_FLAGS = -q
+# environment
+JOURNAL_STREAM = 8:41418
 # environment
 GOMODCACHE = /home/denzel/go/pkg/mod
 # environment
@@ -213,7 +227,9 @@ QT_IM_MODULE = ibus
 # environment
 ELECTRON_RUN_AS_NODE = 1
 # environment
-VSCODE_IPC_HOOK = /run/user/1000/vscode-fa3e4cb0-1.72.0-main.sock
+VSCODE_IPC_HOOK = /run/user/1000/vscode-fa3e4cb0-1.78-main.sock
+# environment
+IM_CONFIG_PHASE = 1
 # environment
 PAPERSIZE = letter
 # environment
@@ -235,7 +251,7 @@ GDMSESSION = ubuntu
 # environment
 LC_IDENTIFICATION = en_US.UTF-8
 # variable set hash-table stats:
-# Load=111/1024=11%, Rehash=0, Collisions=4/149=3%
+# Load=119/1024=12%, Rehash=0, Collisions=6/158=4%
 
 # Pattern-specific Variable Values
 
@@ -243,9 +259,9 @@ LC_IDENTIFICATION = en_US.UTF-8
 
 # Directories
 
-# . (device 66312, inode 4047929): 14 files, no impossibilities.
+# . (device 66312, inode 4047929): 20 files, no impossibilities.
 
-# 14 files, no impossibilities in 1 directories.
+# 20 files, no impossibilities in 1 directories.
 
 # Implicit Rules
 
@@ -268,8 +284,9 @@ compile:
 
 # Not a target:
 Makefile:
+ 
 #  Implicit rule search has been done.
-#  Last modified 2022-08-27 19:11:16.571729351
+#  Last modified 2022-10-22 00:04:35.39468032
 #  File has been updated.
 #  Successfully updated.
 
@@ -300,7 +317,6 @@ gencert:
 		-ca-key=ca-key.pem \
 		-config=cfg/ca-config.json \
 		-profile=server \
- 
 		cfg/server-csr.json | cfssljson -bare server
 	cfssl gencert \
 		-ca=ca.pem \
@@ -352,20 +368,27 @@ test: /home/denzel/.golog/policy.csv /home/denzel/.golog/model.conf
 #  Modification time never checked.
 #  File has not been updated.
 
+build-docker:
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
+#  recipe to execute (from 'Makefile', line 62):
+	docker build -t github.com/denisschmidt/golog:$(TAG) .
+
 # files hash-table stats:
-# Load=11/1024=1%, Rehash=0, Collisions=0/34=0%
+# Load=12/1024=1%, Rehash=0, Collisions=0/35=0%
 # VPATH Search Paths
 
 # No 'vpath' search paths.
 
 # No general ('VPATH' variable) search path.
 
-# strcache buffers: 1 (0) / strings = 25 / storage = 229 B / avg = 9 B
-# current buf: size = 8162 B / used = 229 B / count = 25 / avg = 9 B
+# strcache buffers: 1 (0) / strings = 32 / storage = 294 B / avg = 9 B
+# current buf: size = 8162 B / used = 294 B / count = 32 / avg = 9 B
 
-# strcache performance: lookups = 49 / hit rate = 48%
+# strcache performance: lookups = 57 / hit rate = 43%
 # hash-table stats:
-# Load=25/8192=0%, Rehash=0, Collisions=0/49=0%
-# Finished Make data base on Wed Oct 12 23:30:55 2022
+# Load=32/8192=0%, Rehash=0, Collisions=0/57=0%
+# Finished Make data base on Sat May 13 22:13:34 2023
 
  

@@ -1,0 +1,5 @@
+data-dir: /var/run/proglog/data
+rpc-port: {{.Values.rpcPort}}
+bind-addr:   ".proglog.{{.Release.Namespace}}.\svc.cluster.local:    {{.Values.serfPort}}"
+
+bootstrap: false

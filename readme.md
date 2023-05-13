@@ -138,6 +138,11 @@ A Raft cluster of three servers will tolerate a single server failure while a cl
 of five will tolerate two server failures. I recommend odd number cluster sizes
 because Raft will handle (N–1)/2 failures, where N is the size of your cluster
 
+Use Raft as a means to replicate a log of commands
+and then execute those commands with state machines. If you were building
+a distributed SQL database, you’d replicate and execute the insert and update
+SQL commands;
+
 ### Route and Balance Requests with Pickers
 
 In the gRPC architecture, gRPC resolves services and balances calls across them.
@@ -209,4 +214,3 @@ Install the Chart:
 Connect to Docker image
 
 - sudo docker exec –it <docker_name> /bin/bash
-

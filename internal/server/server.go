@@ -2,8 +2,9 @@ package server
 
 import (
 	"context"
-	"google.golang.org/grpc/health"
 	"time"
+
+	"google.golang.org/grpc/health"
 
 	api "github.com/denisschmidt/golog/api/v1"
 	grpc_middleware "github.com/grpc-ecosystem/go-grpc-middleware"
@@ -140,6 +141,7 @@ func (s *grpcServer) ConsumeStream(req *api.ConsumeRequest, stream api.Log_Consu
 
 func NewGRPCServer(config *Config, grpcOpts ...grpc.ServerOption) (*grpc.Server, error) {
 	logger := zap.L().Named("server")
+
 	zapOpts := []grpc_zap.Option{
 		grpc_zap.WithDurationField(
 			func(duration time.Duration) zapcore.Field {
@@ -150,7 +152,6 @@ func NewGRPCServer(config *Config, grpcOpts ...grpc.ServerOption) (*grpc.Server,
 			},
 		),
 	}
-
 	/*
 		metrics_traces, configure OpenCensus
 
@@ -160,11 +161,11 @@ func NewGRPCServer(config *Config, grpcOpts ...grpc.ServerOption) (*grpc.Server,
 			• Latency
 			• Completed RPCs
 			Now, change the grpcOpts af
-
 	*/
 	trace.ApplyConfig(trace.Config{
 		DefaultSampler: trace.AlwaysSample(),
 	})
+
 	err := view.Register(ocgrpc.DefaultServerViews...)
 	if err != nil {
 		return nil, err

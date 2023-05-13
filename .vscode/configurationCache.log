@@ -1,1 +1,1 @@
-{"buildTargets":["/home/denzel/.golog/model.conf","/home/denzel/.golog/policy.csv","compile","gencert","init","test"],"launchTargets":[],"customConfigurationProvider":{"workspaceBrowse":{"browsePath":[],"compilerArgs":[]},"fileIndex":[]}}
+{"buildTargets":["/home/denzel/.golog/model.conf","/home/denzel/.golog/policy.csv","build-docker","compile","gencert","init","test"],"launchTargets":[],"customConfigurationProvider":{"workspaceBrowse":{"browsePath":[],"compilerArgs":[]},"fileIndex":[]}}
